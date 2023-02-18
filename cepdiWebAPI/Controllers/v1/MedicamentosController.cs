@@ -26,16 +26,21 @@ namespace cepdiWebAPI.Controllers.v1
         // GET: api/<MedicamentosController>
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Get([FromQuery] string? nombre = null, string? presentacion = null, string? concentracion = null)
+        public async Task<IActionResult> Get([FromQuery] int? pageSize = 10, int? pageNumber = 1, string? nombre = null, string? presentacion = null, string? concentracion = null)
         {
             try
             {
-                IList<Models.Medicamento> listaRespuesta = await servMedicamento.GetParametrizado(nombre: nombre, presentacion: presentacion, concentracion: concentracion);
+                (IList<Models.Medicamento> listaRespuesta, int totalRegistros) resultado = await servMedicamento.GetParametrizado(pageSize: (int)pageSize, pageNumber: (int)pageNumber, nombre: nombre, presentacion: presentacion, concentracion: concentracion);
 
-                if (listaRespuesta == null || listaRespuesta.Count == 0)
+                if (resultado.listaRespuesta == null || resultado.listaRespuesta.Count == 0)
                     return StatusCode(StatusCodes.Status204NoContent);
                 else
-                    return Ok(listaRespuesta);
+                {
+                    Response.Headers.Add("PageSize", pageSize.ToString());
+                    Response.Headers.Add("PageNumer", pageNumber.ToString());
+                    Response.Headers.Add("TotalRecords", resultado.totalRegistros.ToString());
+                    return Ok(resultado.listaRespuesta);
+                }
             }
             catch
             {

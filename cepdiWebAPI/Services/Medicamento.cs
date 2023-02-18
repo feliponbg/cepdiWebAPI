@@ -18,7 +18,7 @@ namespace cepdiWebAPI.Services
             this.servExcel = servExcel;
         }
 
-        public async Task<IList<Models.Medicamento>> GetParametrizado(string? nombre = null, string? presentacion = null, string? concentracion = null)
+        public async Task<(IList<Models.Medicamento>, int)> GetParametrizado(int pageSize, int pageNumber, string? nombre = null, string? presentacion = null, string? concentracion = null)
         {
 
             IList<Models.Medicamento> listaRespuesta = null;
@@ -97,12 +97,12 @@ namespace cepdiWebAPI.Services
 
                 //if (resultado.Length == 0)
                 if (!resultado.Any())
-                    return listaRespuesta;
+                    return (listaRespuesta, -1);
             }
             catch (Exception error)
             {
                 this.objLogger.LogError(error.Message);
-                return listaRespuesta;
+                return (listaRespuesta, -1);
             }
 
             listaRespuesta = new List<Models.Medicamento>();
@@ -119,7 +119,7 @@ namespace cepdiWebAPI.Services
                     BHABILITADO = Convert.ToBoolean(item["BHABILITADO"].ToString())
                 });
 
-            return listaRespuesta;
+            return (listaRespuesta.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(), listaRespuesta.Count);
         }
     }
 }
