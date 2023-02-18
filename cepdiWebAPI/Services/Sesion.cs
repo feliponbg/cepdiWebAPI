@@ -39,9 +39,11 @@ namespace cepdiWebAPI.Services
                 //Revisar si existe el usuario:
                 var dt = servExcel.LeerUsuarios();
 
-                var resultado = dt.Select($"usuario = '{objJson.Usuario}' and password = '{objJson.Contraseña}'");
+                //var resultado = dt.Select($"usuario = '{objJson.Usuario}' and password = '{objJson.Contraseña}'");
+                var resultado = dt.AsEnumerable().Where(row => row.Field<string>("usuario") == objJson.Usuario && row.Field<string>("password") == objJson.Contraseña);
 
-                if (resultado.Length == 0)
+                //if (resultado.Length == 0)
+                if(!resultado.Any())
                     return objRespuesta;
             }
             catch (Exception error)
