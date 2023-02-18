@@ -43,14 +43,6 @@ namespace cepdiWebAPI.Services
 
                 if (resultado.Length == 0)
                     return objRespuesta;
-                //revisar si el usuario esta deshabilitado
-                /*if (!userRecord.Disabled)
-                {
-                    
-                }
-                else
-                    return objRespuesta;*/
-                //userRecord.Uid registrar en un tabla para tener el control del ultimo acceso o historial de accesos
             }
             catch (Exception error)
             {

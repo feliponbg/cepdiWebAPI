@@ -23,9 +23,9 @@ namespace cepdiWebAPI.Services.Utilerias
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
             FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
-            IExcelDataReader reader2 = null;
-            reader2 = ExcelReaderFactory.CreateCsvReader(streamer);
-            DataSet results = reader2.AsDataSet();
+            IExcelDataReader reader = null;
+            reader = ExcelReaderFactory.CreateCsvReader(streamer);
+            DataSet results = reader.AsDataSet();
             results.Tables[0].Rows[0].Delete();
             results.AcceptChanges();
 
@@ -82,7 +82,7 @@ namespace cepdiWebAPI.Services.Utilerias
                     if (i == 5) newRow["idperfil"] = Convert.ToInt32(item.ToString());
                     if (i == 6) newRow["estatus"] = Convert.ToInt32(item.ToString());
 
-                    Console.WriteLine(item.ToString());
+                    //Console.WriteLine(item.ToString());
                     i++;
                 }
                 dt.Rows.Add(newRow);

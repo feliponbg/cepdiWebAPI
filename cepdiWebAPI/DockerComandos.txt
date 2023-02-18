@@ -1,0 +1,26 @@
+﻿docker build -f "D:\Des\V\cepdiWebAPI\cepdiWebAPI\Dockerfile" --force-rm -t cepdiwebapi:dev --target base  --label "com.microsoft.created-by=visual-studio" --label "com.microsoft.visual-studio.project-name=cepdiWebAPI" "D:\Des\V\cepdiWebAPI"
+docker build -f "D:\Des\V\cepdiWebAPI\cepdiWebAPI\Dockerfile" 
+			--force-rm 
+			-t cepdiwebapi:dev 
+			--target base  
+			--label "com.microsoft.created-by=visual-studio" 
+			--label "com.microsoft.visual-studio.project-name=cepdiWebAPI" "D:\Des\V\cepdiWebAPI"
+
+
+docker run -dt -v "C:\Users\felip\vsdbg\vs2017u5:/remote_debugger:rw" -v "C:\Users\felip\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro" -v "C:\Users\felip\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro" -v "D:\Des\V\cepdiWebAPI\cepdiWebAPI:/app" -v "D:\Des\V\cepdiWebAPI:/src/" -v "C:\Users\felip\.nuget\packages\:/root/.nuget/fallbackpackages2" -v "C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/root/.nuget/fallbackpackages" -e "ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true" -e "ASPNETCORE_ENVIRONMENT=Development" -e "ASPNETCORE_URLS=https://+:443;http://+:80" -e "DOTNET_USE_POLLING_FILE_WATCHER=1" -e "NUGET_PACKAGES=/root/.nuget/fallbackpackages2" -e "NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2" -P --name cepdiWebAPI --entrypoint tail cepdiwebapi:dev -f /dev/null 
+docker run -dt -p 32790:80 -p 32791:443 -v "C:\Users\felip\vsdbg\vs2017u5:/remote_debugger:rw" -v "C:\Users\felip\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro" -v "C:\Users\felip\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro" -v "D:\Des\V\cepdiWebAPI\cepdiWebAPI:/app" -v "D:\Des\V\cepdiWebAPI:/src/" -v "C:\Users\felip\.nuget\packages\:/root/.nuget/fallbackpackages2" -v "C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/root/.nuget/fallbackpackages" -e "ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true" -e "ASPNETCORE_ENVIRONMENT=Development" -e "ASPNETCORE_URLS=https://+:443;http://+:80" -e "DOTNET_USE_POLLING_FILE_WATCHER=1" -e "NUGET_PACKAGES=/root/.nuget/fallbackpackages2" -e "NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2" -P --name cepdiWebAPI --entrypoint tail cepdiwebapi:dev -f /dev/null 
+docker run -dt -v "C:\Users\felip\vsdbg\vs2017u5:/remote_debugger:rw" 
+				-v "C:\Users\felip\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro" 
+				-v "C:\Users\felip\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro" 
+				-v "D:\Des\V\cepdiWebAPI\cepdiWebAPI:/app" 
+				-v "D:\Des\V\cepdiWebAPI:/src/" 
+				-v "C:\Users\felip\.nuget\packages\:/root/.nuget/fallbackpackages2" 
+				-v "C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages:/root/.nuget/fallbackpackages" 
+				-e "ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true" 
+				-e "ASPNETCORE_ENVIRONMENT=Development" 
+				-e "ASPNETCORE_URLS=https://+:443;http://+:80" 
+				-e "DOTNET_USE_POLLING_FILE_WATCHER=1" 
+				-e "NUGET_PACKAGES=/root/.nuget/fallbackpackages2" 
+				-e "NUGET_FALLBACK_PACKAGES=/root/.nuget/fallbackpackages;/root/.nuget/fallbackpackages2" 
+				-P --name cepdiWebAPI 
+				--entrypoint tail cepdiwebapi:dev -f /dev/null 

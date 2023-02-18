@@ -23,7 +23,10 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": true,
+
+      "httpPort": 5000,
+      "sslPort": 5001
     },
     "IIS": {
       "commandName": "IIS",

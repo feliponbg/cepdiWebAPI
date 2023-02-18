@@ -50,7 +50,7 @@ builder.Services.AddTransient<cepdiWebAPI.Services.Medicamento>();        //Siem
 builder.Services.AddTransient<cepdiWebAPI.Services.Sesion>();
 
 //Servicios Utilerias
-builder.Services.AddTransient<cepdiWebAPI.Services.Utilerias.Excel>();
+builder.Services.AddSingleton<cepdiWebAPI.Services.Utilerias.Excel>();
 #endregion Servicios Locales
 
 builder.Services.AddControllers();

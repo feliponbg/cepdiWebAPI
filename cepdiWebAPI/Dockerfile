@@ -7,9 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["cepdiWebAPI/cepdiWebAPI.csproj", "cepdiWebAPI/"]
+COPY . "cepdiWebAPI/"
+# COPY ["cepdiWebAPI/cepdiWebAPI.csproj", "cepdiWebAPI/"]
 RUN dotnet restore "cepdiWebAPI/cepdiWebAPI.csproj"
-COPY . .
+# COPY . .
 WORKDIR "/src/cepdiWebAPI"
 RUN dotnet build "cepdiWebAPI.csproj" -c Release -o /app/build
 
