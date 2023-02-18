@@ -37,7 +37,7 @@ namespace cepdiWebAPI.Services
             try
             {
                 //Revisar si existe el usuario:
-                var dt = servExcel.Leer(objConfiguracion.GetValue<string>("BaseDeDatosSimulacion:TablaUsuarios"));
+                var dt = servExcel.LeerUsuarios();
 
                 var resultado = dt.Select($"usuario = '{objJson.Usuario}' and password = '{objJson.Contraseña}'");
 

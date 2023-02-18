@@ -26,9 +26,21 @@ namespace cepdiWebAPI.Controllers.v1
         // GET: api/<MedicamentosController>
         [HttpGet]
         [Authorize]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get([FromQuery] string? nombre = null, string? presentacion = null, string? concentracion = null)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                IList<Models.Medicamento> listaRespuesta = await servMedicamento.GetParametrizado(nombre: nombre, presentacion: presentacion, concentracion: concentracion);
+
+                if (listaRespuesta == null || listaRespuesta.Count == 0)
+                    return StatusCode(StatusCodes.Status204NoContent);
+                else
+                    return Ok(listaRespuesta);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         /*
