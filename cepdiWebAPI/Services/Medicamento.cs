@@ -1,4 +1,6 @@
 ﻿using cepdiWebAPI.Services.Utilerias;
+using System.Data;
+using System.Linq;
 
 namespace cepdiWebAPI.Services
 {
@@ -22,29 +24,79 @@ namespace cepdiWebAPI.Services
             IList<Models.Medicamento> listaRespuesta = null;
 
             //leer el archivo de texto haciendolo pasar por excel
-            System.Data.DataRow[]? resultado;
+            //System.Data.DataRow[]? resultado;
+            EnumerableRowCollection<DataRow> resultado = null;
             try
             {
                 //Revisar si existe el usuario:
                 var dt = servExcel.LeerMedicamentos();
 
-                string where = string.Empty;
+                /*string where = string.Empty;
                 where = !string.IsNullOrEmpty(nombre) ? $"NOMBRE like '%{nombre}%'" : string.Empty;
                 where += !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(where) ? $" or PRESENTACION like'%{presentacion}%'" : string.Empty;
                 where = !string.IsNullOrEmpty(presentacion) && string.IsNullOrEmpty(where) ? $"PRESENTACION like'%{presentacion}%'" : where;
-                /*if (!string.IsNullOrEmpty(presentacion))
-                {
-                    if (!string.IsNullOrEmpty(where))
-                        where += $" or PRESENTACION like'%{presentacion}%'";
-                    else
-                        where = $"PRESENTACION like'%{presentacion}%'";
-                }*/
+                //if (!string.IsNullOrEmpty(presentacion))
+                //{
+                //    if (!string.IsNullOrEmpty(where))
+                //        where += $" or PRESENTACION like'%{presentacion}%'";
+                //    else
+                //        where = $"PRESENTACION like'%{presentacion}%'";
+                //}
                 where += !string.IsNullOrEmpty(concentracion) && !string.IsNullOrEmpty(where) ? $" or CONCENTRACION like'%{concentracion}%'" : string.Empty;
                 where = !string.IsNullOrEmpty(concentracion) && string.IsNullOrEmpty(where) ? $"CONCENTRACION like'%{concentracion}%'" : where;
                 //where = $"NOMBRE like '%{nombre}%' or PRESENTACION like'%{presentacion}%' or CONCENTRACION like '%{concentracion}%'";
-                resultado = dt.Select(where);
+                resultado = dt.Select(where);*/
 
-                if (resultado.Length == 0)
+                if (!string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(concentracion))
+                {
+                    resultado = from m in dt.AsEnumerable()
+                                where m.Field<string>("NOMBRE").ToUpper().Contains(nombre.ToUpper())
+                                  || m.Field<string>("PRESENTACION").ToUpper().Contains(presentacion.ToUpper())
+                                  || m.Field<string>("CONCENTRACION").ToUpper().Contains(concentracion.ToUpper())
+                                select m;
+                } 
+                else if (!string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(presentacion))
+                {
+                    resultado = from m in dt.AsEnumerable()
+                                where m.Field<string>("NOMBRE").ToUpper().Contains(nombre.ToUpper())
+                                  || m.Field<string>("PRESENTACION").ToUpper().Contains(presentacion.ToUpper())
+                                select m;
+                }
+                else if (!string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(concentracion))
+                {
+                    resultado = from m in dt.AsEnumerable()
+                                where m.Field<string>("NOMBRE").ToUpper().Contains(nombre.ToUpper())
+                                  || m.Field<string>("CONCENTRACION").ToUpper().Contains(concentracion.ToUpper())
+                                select m;
+                }
+                else if (!string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(concentracion))
+                {
+                    resultado = from m in dt.AsEnumerable()
+                                where m.Field<string>("PRESENTACION").ToUpper().Contains(presentacion.ToUpper())
+                                  || m.Field<string>("CONCENTRACION").ToUpper().Contains(concentracion.ToUpper())
+                                select m;
+                }
+                else if (!string.IsNullOrEmpty(nombre))
+                {
+                    resultado = from m in dt.AsEnumerable()
+                                where m.Field<string>("NOMBRE").ToUpper().Contains(nombre.ToUpper())
+                                select m;
+                }
+                else if (!string.IsNullOrEmpty(presentacion))
+                {
+                    resultado = from m in dt.AsEnumerable()
+                                where m.Field<string>("PRESENTACION").ToUpper().Contains(presentacion.ToUpper())
+                                select m;
+                }
+                else if (!string.IsNullOrEmpty(concentracion))
+                {
+                    resultado = from m in dt.AsEnumerable()
+                                where m.Field<string>("CONCENTRACION").ToUpper().Contains(concentracion.ToUpper())
+                                select m;
+                }
+
+                //if (resultado.Length == 0)
+                if (!resultado.Any())
                     return listaRespuesta;
             }
             catch (Exception error)

@@ -40,10 +40,14 @@ namespace cepdiWebAPI.Services
                 var dt = servExcel.LeerUsuarios();
 
                 //var resultado = dt.Select($"usuario = '{objJson.Usuario}' and password = '{objJson.Contraseña}'");
-                var resultado = dt.AsEnumerable().Where(row => row.Field<string>("usuario") == objJson.Usuario && row.Field<string>("password") == objJson.Contraseña);
+                //var resultado = dt.AsEnumerable().Where(row => row.Field<string>("usuario") == objJson.Usuario && row.Field<string>("password") == objJson.Contraseña);
+                var resultado = from u in dt.AsEnumerable()
+                                where u.Field<string>("usuario") == objJson.Usuario
+                                    && u.Field<string>("password") == objJson.Contraseña
+                                select u;
 
                 //if (resultado.Length == 0)
-                if(!resultado.Any())
+                if (!resultado.Any())
                     return objRespuesta;
             }
             catch (Exception error)
