@@ -41,6 +41,10 @@ builder.Services.AddCors(options =>
 });
 #endregion CORS
 
+#region AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+#endregion AutoMapper
+
 // Add services to the container.
 #region Servicios Locales
 //Utilerias

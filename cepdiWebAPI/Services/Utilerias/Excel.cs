@@ -23,6 +23,9 @@ namespace cepdiWebAPI.Services.Utilerias
             var contentRoot = objConfiguracion.GetValue<string>(WebHostDefaults.ContentRootKey);
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
+            if (!File.Exists(contentRoot + archivo))
+                throw new FileNotFoundException($"La tabla no existe: {contentRoot + archivo}");
+
             FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
             IExcelDataReader reader = null;
             reader = ExcelReaderFactory.CreateCsvReader(streamer);
@@ -97,6 +100,9 @@ namespace cepdiWebAPI.Services.Utilerias
             string archivo = objConfiguracion.GetValue<string>("BaseDeDatosSimulacion:TablaMedicamentos");
             var contentRoot = objConfiguracion.GetValue<string>(WebHostDefaults.ContentRootKey);
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+            if (!File.Exists(contentRoot + archivo))
+                throw new FileNotFoundException($"La tabla no existe: {contentRoot + archivo}");
 
             FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
             IExcelDataReader reader = null;

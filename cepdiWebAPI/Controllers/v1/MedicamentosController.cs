@@ -23,14 +23,14 @@ namespace cepdiWebAPI.Controllers.v1
 
 
         
-        // GET: api/<MedicamentosController>
+        // GET: api/v1/<MedicamentosController>
         [HttpGet]
         [Authorize]
         public async Task<IActionResult> Get([FromQuery] int? pageSize = 10, int? pageNumber = 1, string? nombre = null, string? presentacion = null, string? concentracion = null)
         {
             try
             {
-                (IList<Models.Medicamento> listaRespuesta, int totalRegistros) resultado = await servMedicamento.GetParametrizado(pageSize: (int)pageSize, pageNumber: (int)pageNumber, nombre: nombre, presentacion: presentacion, concentracion: concentracion);
+                (IList<Models.Medicamento> listaRespuesta, int totalRegistros) resultado = await servMedicamento.ObtenerParametrizado(pageSize: (int)pageSize, pageNumber: (int)pageNumber, nombre: nombre, presentacion: presentacion, concentracion: concentracion);
 
                 if (resultado.listaRespuesta == null || resultado.listaRespuesta.Count == 0)
                     return StatusCode(StatusCodes.Status204NoContent);
@@ -48,20 +48,51 @@ namespace cepdiWebAPI.Controllers.v1
             }
         }
 
-        /*
-        // GET api/<MedicamentosController>/5
+        
+        // GET api/v1/<MedicamentosController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [Authorize]
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                Models.Medicamento objRespuesta = await servMedicamento.ObtenerPorId(id: id);
+
+                if (objRespuesta == null)
+                    return StatusCode(StatusCodes.Status204NoContent);
+                else
+                    return Ok(objRespuesta);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        // POST api/<MedicamentosController>
+        
+        // POST api/v1/<MedicamentosController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        [Authorize]
+        public async Task<IActionResult> Post([FromBody] Models.ViewModels.Medicamento objJson)
         {
+
+            try
+            {
+                Models.Medicamento objRespuesta = await servMedicamento.Crear(objJson);
+
+                if (objRespuesta == null)
+                    return StatusCode(StatusCodes.Status204NoContent);
+                else
+                    return StatusCode(StatusCodes.Status201Created, objRespuesta);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
         }
 
+        /*
         // PUT api/<MedicamentosController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
