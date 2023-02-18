@@ -24,12 +24,23 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": true,
       "useSSL": true
+    },
+    "IIS": {
+      "commandName": "IIS",
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/cepdiWebAPI/",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:10309",
       "sslPort": 44383

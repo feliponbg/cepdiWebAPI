@@ -1,4 +1,4 @@
-namespace cepdiWebAPI
+namespace cepdiWebAPI.Controllers.prueba
 {
     public class WeatherForecast
     {

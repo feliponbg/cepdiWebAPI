@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace cepdiWebAPI.Controllers
+namespace cepdiWebAPI.Controllers.prueba
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/prueba/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -18,7 +18,7 @@ namespace cepdiWebAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        /*[HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -28,6 +28,6 @@ namespace cepdiWebAPI.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
-        }
+        }*/
     }
 }
