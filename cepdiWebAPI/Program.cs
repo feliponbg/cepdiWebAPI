@@ -50,11 +50,12 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //Utilerias
 
 //Servicios
-builder.Services.AddTransient<cepdiWebAPI.Services.Medicamento>();        //Siempre es diferente, No mantiene ningun tipo de estado
 builder.Services.AddTransient<cepdiWebAPI.Services.Sesion>();
+builder.Services.AddTransient<cepdiWebAPI.Services.Medicamento>();        //Siempre es diferente, No mantiene ningun tipo de estado
+builder.Services.AddTransient<cepdiWebAPI.Services.FormaFarmaceutica>();
 
 //Servicios Utilerias
-builder.Services.AddSingleton<cepdiWebAPI.Services.Utilerias.Excel>();
+builder.Services.AddSingleton<cepdiWebAPI.Services.Utilerias.TxtCsv>();
 #endregion Servicios Locales
 
 builder.Services.AddControllers();

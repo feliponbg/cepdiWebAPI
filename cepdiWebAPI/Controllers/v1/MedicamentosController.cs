@@ -52,11 +52,11 @@ namespace cepdiWebAPI.Controllers.v1
         // GET api/v1/<MedicamentosController>/5
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
             try
             {
-                Models.Medicamento objRespuesta = await servMedicamento.ObtenerPorId(id: id);
+                Models.Medicamento objRespuesta = await servMedicamento.ObtenerPorId(id);
 
                 if (objRespuesta == null)
                     return StatusCode(StatusCodes.Status204NoContent);
@@ -81,7 +81,7 @@ namespace cepdiWebAPI.Controllers.v1
                 Models.Medicamento objRespuesta = await servMedicamento.Crear(objJson);
 
                 if (objRespuesta == null)
-                    return StatusCode(StatusCodes.Status204NoContent);
+                    return StatusCode(StatusCodes.Status400BadRequest);
                 else
                     return StatusCode(StatusCodes.Status201Created, objRespuesta);
             }
@@ -92,18 +92,50 @@ namespace cepdiWebAPI.Controllers.v1
 
         }
 
-        /*
-        // PUT api/<MedicamentosController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+
+        // PUT api/v1/<MedicamentosController>/5
+        //[HttpPut("{id}")]
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> Put(Models.ViewModels.Medicamento objJson)
         {
+            try
+            {
+                Models.Medicamento objRespuesta = await servMedicamento.Modificar(objJson);
+
+                if (objRespuesta == null)
+                    return StatusCode(StatusCodes.Status204NoContent);
+                else
+                    return Ok(objRespuesta);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        // DELETE api/<MedicamentosController>/5
+
+        // DELETE api/v1/<MedicamentosController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                Models.Medicamento objRespuesta = await servMedicamento.Eliminar(id: id);
+
+                if (objRespuesta == null)
+                    return StatusCode(StatusCodes.Status204NoContent);
+                else
+                    return Ok(objRespuesta);
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
         }
-        */
+
+
     }
 }

@@ -3,7 +3,7 @@
     public class Medicamento
     {
 
-        public int? IIDMEDICAMENTO { get; set; }
+        public long? IIDMEDICAMENTO { get; set; }
 
         public string NOMBRE { get; set; }
 

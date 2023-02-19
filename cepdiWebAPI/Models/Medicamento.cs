@@ -3,13 +3,13 @@
     public class Medicamento
     {
 
-        public int IIDMEDICAMENTO { get; set; }
+        public long IIDMEDICAMENTO { get; set; }
 
         public string NOMBRE { get; set; }
 
         public string CONCENTRACION { get; set; }
 
-        public int IIDFORMAFARMACEUTICA { get; set; }
+        public long IIDFORMAFARMACEUTICA { get; set; }
 
         public float PRECIO { get; set; }
 
@@ -18,6 +18,8 @@
         public string PRESENTACION { get; set; }
 
         public bool BHABILITADO { get; set; }
+
+        public string NOMBREFORMAFARMACEUTICA { get; set; }
 
 
     }

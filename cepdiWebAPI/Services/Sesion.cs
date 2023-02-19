@@ -12,16 +12,16 @@ namespace cepdiWebAPI.Services
     {
         private readonly ILogger<Sesion> objLogger;
         private readonly IConfiguration objConfiguracion;
-        private readonly Excel servExcel;
+        private readonly TxtCsv servBD;
 
         private enum TipoDuracion { Segundos = 1, Minutos = 2, Horas = 3, Dias = 4 };
         private TipoDuracion tipoDuracion;
 
-        public Sesion(ILogger<Sesion> logger, IConfiguration configuration, Services.Utilerias.Excel servExcel)
+        public Sesion(ILogger<Sesion> logger, IConfiguration configuration, Services.Utilerias.TxtCsv servBD)
         {
             this.objLogger = logger;
             this.objConfiguracion = configuration;
-            this.servExcel = servExcel;
+            this.servBD = servBD;
         }
 
         public async Task<Models.Sesion> InciarSesion(Models.ViewModels.Sesion objJson)
@@ -37,13 +37,14 @@ namespace cepdiWebAPI.Services
             try
             {
                 //Revisar si existe el usuario:
-                var dt = servExcel.LeerUsuarios();
+                var dt = servBD.LeerUsuarios();
 
                 //var resultado = dt.Select($"usuario = '{objJson.Usuario}' and password = '{objJson.Contraseña}'");
                 //var resultado = dt.AsEnumerable().Where(row => row.Field<string>("usuario") == objJson.Usuario && row.Field<string>("password") == objJson.Contraseña);
                 var resultado = from u in dt.AsEnumerable()
                                 where u.Field<string>("usuario") == objJson.Usuario
                                     && u.Field<string>("password") == objJson.Contraseña
+                                    && u.Field<bool>("estatus") == true
                                 select u;
 
                 //if (resultado.Length == 0)
