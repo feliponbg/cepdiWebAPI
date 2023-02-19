@@ -52,7 +52,7 @@ namespace cepdiWebAPI.Controllers.v1
         // GET api/v1/<MedicamentosController>/5
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] long id)
         {
             try
             {

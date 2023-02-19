@@ -38,7 +38,7 @@ namespace cepdiWebAPI.Services.Utilerias
             DataRow newRow;
 
             column = new DataColumn();
-            column.DataType = System.Type.GetType("System.Int32");
+            column.DataType = System.Type.GetType("System.Int64");
             column.ColumnName = "idusuario";
             dt.Columns.Add(column);
 
@@ -78,7 +78,7 @@ namespace cepdiWebAPI.Services.Utilerias
                 int i = 0;
                 foreach (var item in row.ItemArray)
                 {
-                    if (i == 0) newRow["idusuario"] = Convert.ToInt32(item.ToString());
+                    if (i == 0) newRow["idusuario"] = Convert.ToInt64(item.ToString());
                     if (i == 1) newRow["nombre"] = item.ToString();
                     if (i == 2) newRow["fechacreacion"] =  Convert.ToDateTime(item.ToString());
                     if (i == 3) newRow["usuario"] = item.ToString();
@@ -162,10 +162,10 @@ namespace cepdiWebAPI.Services.Utilerias
                 int i = 0;
                 foreach (var item in row.ItemArray)
                 {
-                    if (i == 0) newRow["IIDMEDICAMENTO"] = Convert.ToInt32(item.ToString());
+                    if (i == 0) newRow["IIDMEDICAMENTO"] = Convert.ToInt64(item.ToString());
                     if (i == 1) newRow["NOMBRE"] = item.ToString();
                     if (i == 2) newRow["CONCENTRACION"] = item.ToString();
-                    if (i == 3) newRow["IIDFORMAFARMACEUTICA"] = Convert.ToInt32(item.ToString());
+                    if (i == 3) newRow["IIDFORMAFARMACEUTICA"] = Convert.ToInt64(item.ToString());
                     if (i == 4) newRow["PRECIO"] = Convert.ToSingle(item.ToString());
                     if (i == 5) newRow["STOCK"] = Convert.ToInt32(item.ToString());
                     if (i == 6) newRow["PRESENTACION"] = item.ToString();
@@ -220,7 +220,7 @@ namespace cepdiWebAPI.Services.Utilerias
                 int i = 0;
                 foreach (var item in row.ItemArray)
                 {
-                    if (i == 0) newRow["IIDFORMAFARMACEUTICA"] = Convert.ToInt32(item.ToString());
+                    if (i == 0) newRow["IIDFORMAFARMACEUTICA"] = Convert.ToInt64(item.ToString());
                     if (i == 1) newRow["NOMBRE"] = item.ToString();
                     if (i == 2) newRow["BHABILITADO"] = item.ToString() == "1" ? true : false;
                     i++;

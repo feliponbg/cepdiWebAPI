@@ -244,44 +244,37 @@ namespace cepdiWebAPI.Services
             return (listaRespuesta.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList(), listaRespuesta.Count);
         }
 
-        public async Task<Models.Medicamento> ObtenerPorId(int id)
+        public async Task<Models.Medicamento> ObtenerPorId(long id)
         {
 
             Models.Medicamento objRespuesta = null;
 
             //leer el archivo de texto haciendolo pasar por excel
-            EnumerableRowCollection<DataRow> resultado = null;
             try
             {
                 var dt = servBD.LeerMedicamentos();
 
-                resultado = from m in dt.AsEnumerable()
-                            where m.Field<int>("IIDMEDICAMENTO") == id
-                            select m;
+                objRespuesta = (Models.Medicamento)(from m in dt.AsEnumerable()
+                                                    where m.Field<long>("IIDMEDICAMENTO") == id
+                                                    select new Models.Medicamento
+                                                    {
+                                                        IIDMEDICAMENTO = m.Field<long>("IIDMEDICAMENTO"),
+                                                        NOMBRE = m.Field<string>("NOMBRE"),
+                                                        CONCENTRACION = m.Field<string>("CONCENTRACION"),
+                                                        IIDFORMAFARMACEUTICA = m.Field<long>("IIDFORMAFARMACEUTICA"),
+                                                        PRECIO = m.Field<float>("PRECIO"),
+                                                        STOCK = m.Field<int>("STOCK"),
+                                                        PRESENTACION = m.Field<string>("PRESENTACION"),
+                                                        BHABILITADO = m.Field<bool>("BHABILITADO")
+                                                    }).AsEnumerable().ToList()[0];
 
-                //if (resultado.Length == 0)
-                if (!resultado.Any())
+                if (objRespuesta != null)
                     return objRespuesta;
             }
             catch (Exception error)
             {
                 this.objLogger.LogError(error.Message);
                 return objRespuesta;
-            }
-
-            foreach (var item in resultado)
-            {
-                objRespuesta = new Models.Medicamento()
-                {
-                    IIDMEDICAMENTO = Convert.ToInt32(item["IIDMEDICAMENTO"].ToString()),
-                    NOMBRE = item["NOMBRE"].ToString(),
-                    CONCENTRACION = item["CONCENTRACION"].ToString(),
-                    IIDFORMAFARMACEUTICA = Convert.ToInt32(item["IIDFORMAFARMACEUTICA"].ToString()),
-                    PRECIO = Convert.ToSingle(item["PRECIO"].ToString()),
-                    STOCK = Convert.ToInt32(item["STOCK"].ToString()),
-                    PRESENTACION = item["PRESENTACION"].ToString(),
-                    BHABILITADO = Convert.ToBoolean(item["BHABILITADO"].ToString())
-                };
             }
 
             return objRespuesta;

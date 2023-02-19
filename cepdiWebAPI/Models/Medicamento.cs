@@ -20,7 +20,7 @@
         public bool BHABILITADO { get; set; }
 
         //campo foraneo
-        public string NOMBREFORMAFARMACEUTICA { get; set; }
+        public string? NOMBREFORMAFARMACEUTICA { get; set; }
 
 
     }
