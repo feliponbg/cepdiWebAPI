@@ -26,10 +26,8 @@ namespace cepdiWebAPI.Services
             IList<Models.FormaFarmaceutica> listaRespuesta = null;
 
             //leer el archivo de texto haciendolo pasar por excel
-            //EnumerableRowCollection<DataRow> resultado = null;
             try
             {
-                //Revisar si existe el usuario:
                 var dt = servBD.LeerFormasFarmaceuticas();
 
                 listaRespuesta = (List<Models.FormaFarmaceutica>)(from m in dt.AsEnumerable()
@@ -49,15 +47,6 @@ namespace cepdiWebAPI.Services
                 this.objLogger.LogError(error.Message);
                 return listaRespuesta;
             }
-
-            /*listaRespuesta = new List<Models.FormaFarmaceutica>();
-            foreach (var item in resultado)
-                listaRespuesta.Add(new Models.FormaFarmaceutica()
-                {
-                    IIDFORMAFARMACEUTICA = Convert.ToInt32(item["IIDFORMAFARMACEUTICA"].ToString()),
-                    NOMBRE = item["NOMBRE"].ToString(),
-                    BHABILITADO = Convert.ToBoolean(item["BHABILITADO"].ToString())
-                });*/
 
             listaRespuesta = listaRespuesta.OrderBy(l => l.IIDFORMAFARMACEUTICA).ToList();
 

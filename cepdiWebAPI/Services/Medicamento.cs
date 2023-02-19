@@ -29,25 +29,8 @@ namespace cepdiWebAPI.Services
             //leer el archivo de texto haciendolo pasar por excel
             try
             {
-                //Revisar si existe el usuario:
                 var dt = servBD.LeerMedicamentos();
                 var dt2 = servBD.LeerFormasFarmaceuticas();
-
-                /*string where = string.Empty;
-                where = !string.IsNullOrEmpty(nombre) ? $"NOMBRE like '%{nombre}%'" : string.Empty;
-                where += !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(where) ? $" or PRESENTACION like'%{presentacion}%'" : string.Empty;
-                where = !string.IsNullOrEmpty(presentacion) && string.IsNullOrEmpty(where) ? $"PRESENTACION like'%{presentacion}%'" : where;
-                //if (!string.IsNullOrEmpty(presentacion))
-                //{
-                //    if (!string.IsNullOrEmpty(where))
-                //        where += $" or PRESENTACION like'%{presentacion}%'";
-                //    else
-                //        where = $"PRESENTACION like'%{presentacion}%'";
-                //}
-                where += !string.IsNullOrEmpty(concentracion) && !string.IsNullOrEmpty(where) ? $" or CONCENTRACION like'%{concentracion}%'" : string.Empty;
-                where = !string.IsNullOrEmpty(concentracion) && string.IsNullOrEmpty(where) ? $"CONCENTRACION like'%{concentracion}%'" : where;
-                //where = $"NOMBRE like '%{nombre}%' or PRESENTACION like'%{presentacion}%' or CONCENTRACION like '%{concentracion}%'";
-                resultado = dt.Select(where);*/
 
                 //filtros like
                 if (!string.IsNullOrEmpty(nombre) && !string.IsNullOrEmpty(presentacion) && !string.IsNullOrEmpty(concentracion))
@@ -247,7 +230,6 @@ namespace cepdiWebAPI.Services
                                                                 NOMBREFORMAFARMACEUTICA = ff.Field<string>("NOMBRE")
                                                             }).AsEnumerable().ToList();*/
 
-                //if (resultado.Length == 0)
                 if (!listaRespuesta.Any())
                     return (listaRespuesta, -1);
             }
@@ -256,21 +238,6 @@ namespace cepdiWebAPI.Services
                 this.objLogger.LogError(error.Message);
                 return (listaRespuesta, -1);
             }
-
-            /*listaRespuesta = new List<Models.Medicamento>();
-            foreach (var item in resultado)
-                listaRespuesta.Add(new Models.Medicamento()
-                {
-                    IIDMEDICAMENTO = Convert.ToInt64(item["IIDMEDICAMENTO"].ToString()),
-                    NOMBRE = item["NOMBRE"].ToString(),
-                    CONCENTRACION = item["CONCENTRACION"].ToString(),
-                    IIDFORMAFARMACEUTICA = Convert.ToInt64(item["IIDFORMAFARMACEUTICA"].ToString()),
-                    PRECIO = Convert.ToSingle(item["PRECIO"].ToString()),
-                    STOCK = Convert.ToInt32(item["STOCK"].ToString()),
-                    PRESENTACION = item["PRESENTACION"].ToString(),
-                    BHABILITADO = Convert.ToBoolean(item["BHABILITADO"].ToString()),
-                    //NOMBREFORMAFARMACEUTICA = item["NOMBREFORMAFARMACEUTICA"].ToString()
-                });*/
 
             listaRespuesta = listaRespuesta.OrderBy(l => l.IIDMEDICAMENTO).ToList();
 
@@ -286,7 +253,6 @@ namespace cepdiWebAPI.Services
             EnumerableRowCollection<DataRow> resultado = null;
             try
             {
-                //Revisar si existe el usuario:
                 var dt = servBD.LeerMedicamentos();
 
                 resultado = from m in dt.AsEnumerable()
@@ -369,13 +335,11 @@ namespace cepdiWebAPI.Services
             EnumerableRowCollection<DataRow> resultado = null;
             try
             {
-                //Revisar si existe el usuario:
                 var dt = servBD.LeerMedicamentos();
 
                 resultado = from m in dt.AsEnumerable()
                             select m;
 
-                //if (resultado.Length == 0)
                 if (!resultado.Any())
                     return null;
             }
