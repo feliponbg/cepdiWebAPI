@@ -26,10 +26,14 @@ namespace cepdiWebAPI.Services.Utilerias
             if (!File.Exists(contentRoot + archivo))
                 throw new FileNotFoundException($"La tabla no existe: {contentRoot + archivo}");
 
-            FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
-            IExcelDataReader reader = null;
-            reader = ExcelReaderFactory.CreateCsvReader(streamer);
-            DataSet results = reader.AsDataSet();
+            DataSet results = null;
+            //FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
+            using (FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open))
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateCsvReader(streamer);
+                results = reader.AsDataSet();
+            }
             results.Tables[0].Rows[0].Delete();
             results.AcceptChanges();
 
@@ -104,10 +108,14 @@ namespace cepdiWebAPI.Services.Utilerias
             if (!File.Exists(contentRoot + archivo))
                 throw new FileNotFoundException($"La tabla no existe: {contentRoot + archivo}");
 
-            FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
-            IExcelDataReader reader = null;
-            reader = ExcelReaderFactory.CreateCsvReader(streamer);
-            DataSet results = reader.AsDataSet();
+            DataSet results = null;
+            //FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
+            using (FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open))
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateCsvReader(streamer);
+                results = reader.AsDataSet();
+            }
             results.Tables[0].Rows[0].Delete();
             results.AcceptChanges();
 
@@ -188,10 +196,14 @@ namespace cepdiWebAPI.Services.Utilerias
             if (!File.Exists(contentRoot + archivo))
                 throw new FileNotFoundException($"La tabla no existe: {contentRoot + archivo}");
 
-            FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
-            IExcelDataReader reader = null;
-            reader = ExcelReaderFactory.CreateCsvReader(streamer);
-            DataSet results = reader.AsDataSet();
+            DataSet results = null;
+            //FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open);
+            using (FileStream streamer = new FileStream(contentRoot + archivo, FileMode.Open))
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateCsvReader(streamer);
+                results = reader.AsDataSet();
+            }
             results.Tables[0].Rows[0].Delete();
             results.AcceptChanges();
 
