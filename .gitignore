@@ -6,8 +6,6 @@
 bin/
 obj/
 
-**/cepdiWebAPI/cepdiWebAPIResources/BD/
-
 # Common node modules locations
 /node_modules
 /wwwroot/node_modules
@@ -20,6 +18,8 @@ obj/
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
 ##############################################################################################################
+
+**/cepdiWebAPI/cepdiWebAPIResources/BD/
 
 # User-specific files
 *.rsuser
