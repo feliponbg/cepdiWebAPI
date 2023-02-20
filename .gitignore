@@ -19,7 +19,7 @@ obj/
 
 ##############################################################################################################
 
-**/cepdiWebAPI/cepdiWebAPIResources/BD/
+**/BD/
 
 # User-specific files
 *.rsuser
