@@ -6,7 +6,7 @@
 bin/
 obj/
 
-**/cepdiWebAPI/cepdiWebAPIResources/BD/*.txt
+**/cepdiWebAPI/cepdiWebAPIResources/BD/
 
 # Common node modules locations
 /node_modules
