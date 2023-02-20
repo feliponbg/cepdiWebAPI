@@ -1,0 +1,350 @@
+{
+	"info": {
+		"_postman_id": "ba09830a-24ae-4fcc-8a1c-8022b29438f4",
+		"name": "cepdi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6088579"
+	},
+	"item": [
+		{
+			"name": "Sesion",
+			"item": [
+				{
+					"name": "docker http",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"usuario\": \"Jesus\",\r\n  \"contraseña\": \"123456\",\r\n  \"mantenerSesionIniciada\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:10309/api/v1/Sesiones/IniciarSesion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "10309",
+							"path": [
+								"api",
+								"v1",
+								"Sesiones",
+								"IniciarSesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "docker ssl",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"usuario\": \"0382\",\r\n  \"contraseña\": \"EZRWWG13\",\r\n  \"mantenerSesionIniciada\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44383/api/v1/Sesiones/IniciarSesion",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"Sesiones",
+								"IniciarSesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validar token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc3VhcmlvIjoiMDM4MiIsIkNhZHVjaWRhZCI6IjAyLzIyLzIwMjMgMTA6NTM6NTkiLCJuYmYiOjE2NzY4MDQwMzksImV4cCI6MTY3NzA2MzIzOSwiaWF0IjoxNjc2ODA0MDM5fQ.Rr9HnBdLjlBln_UuMMQEbAk_0w8ic7rd6fZCYTUpXQ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44383/api/v1/Sesiones/ValidarSesion",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"Sesiones",
+								"ValidarSesion"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medicamentos",
+			"item": [
+				{
+					"name": "GET medicamentos parametrizado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc3VhcmlvIjoiMDM4MiIsIkNhZHVjaWRhZCI6IjIzLzAyLzIwMjMgMDM6NDQ6NTIgcC4gbS4iLCJuYmYiOjE2NzY5MDc4OTIsImV4cCI6MTY3NzE2NzA5MiwiaWF0IjoxNjc2OTA3ODkyfQ.3jbHqi2Q6d6El_yPYl01K7qecW0L3ddWfmAxMIbhFSQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44383/api/v1/Medicamentos?pageSize=5&pageNumber=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"Medicamentos"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "5"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "nombre",
+									"value": "IBUPROFENO",
+									"disabled": true
+								},
+								{
+									"key": "presentacion",
+									"value": "taBLETA",
+									"disabled": true
+								},
+								{
+									"key": "concentracion",
+									"value": "mg",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET medicamentos por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc3VhcmlvIjoiMDM4MiIsIkNhZHVjaWRhZCI6IjAyLzIxLzIwMjMgMDQ6MjY6NDciLCJuYmYiOjE2NzY2OTQ0MDcsImV4cCI6MTY3Njk1MzYwNywiaWF0IjoxNjc2Njk0NDA3fQ.Vpu5PW34yRbhJdb5HfZuzZuLZGcgAi1KxrKj-WImjio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44383/api/v1/Medicamentos/15",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"Medicamentos",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST medicamentos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc3VhcmlvIjoiMDM4MiIsIkNhZHVjaWRhZCI6IjAyLzIxLzIwMjMgMDQ6MjY6NDciLCJuYmYiOjE2NzY2OTQ0MDcsImV4cCI6MTY3Njk1MzYwNywiaWF0IjoxNjc2Njk0NDA3fQ.Vpu5PW34yRbhJdb5HfZuzZuLZGcgAi1KxrKj-WImjio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Diclofenaco\",\r\n    \"concentracion\": \"500mg\",\r\n    \"iidformafarmaceutica\": 2,\r\n    \"precio\": 120.5,\r\n    \"stock\": 32,\r\n    \"presentacion\": \"Caja\",\r\n    \"bhabilitado\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44383/api/v1/Medicamentos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"Medicamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT medicamentos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc3VhcmlvIjoiMDM4MiIsIkNhZHVjaWRhZCI6IjAyLzIxLzIwMjMgMDQ6MjY6NDciLCJuYmYiOjE2NzY2OTQ0MDcsImV4cCI6MTY3Njk1MzYwNywiaWF0IjoxNjc2Njk0NDA3fQ.Vpu5PW34yRbhJdb5HfZuzZuLZGcgAi1KxrKj-WImjio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"iidmedicamento\": 11,\r\n    \"nombre\": \"Reumofan\",\r\n    \"concentracion\": \"250 MG\",\r\n    \"iidformafarmaceutica\": 1,\r\n    \"precio\": 119.39,\r\n    \"stock\": 25,\r\n    \"presentacion\": \"caja pequeña\",\r\n    \"bhabilitado\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44383/api/v1/Medicamentos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"Medicamentos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE medicamentos por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc3VhcmlvIjoiMDM4MiIsIkNhZHVjaWRhZCI6IjAyLzIxLzIwMjMgMDQ6MjY6NDciLCJuYmYiOjE2NzY2OTQ0MDcsImV4cCI6MTY3Njk1MzYwNywiaWF0IjoxNjc2Njk0NDA3fQ.Vpu5PW34yRbhJdb5HfZuzZuLZGcgAi1KxrKj-WImjio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44383/api/v1/Medicamentos/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"Medicamentos",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Formas Farmaceuticas",
+			"item": [
+				{
+					"name": "GET medicamentos parametrizado",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc3VhcmlvIjoiMDM4MiIsIkNhZHVjaWRhZCI6IjIzLzAyLzIwMjMgMDM6NDQ6NTIgcC4gbS4iLCJuYmYiOjE2NzY5MDc4OTIsImV4cCI6MTY3NzE2NzA5MiwiaWF0IjoxNjc2OTA3ODkyfQ.3jbHqi2Q6d6El_yPYl01K7qecW0L3ddWfmAxMIbhFSQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44383/api/v1/FormasFarmaceuticas",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44383",
+							"path": [
+								"api",
+								"v1",
+								"FormasFarmaceuticas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
