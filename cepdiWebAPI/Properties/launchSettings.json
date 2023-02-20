@@ -25,8 +25,8 @@
       "publishAllPorts": true,
       "useSSL": true,
 
-      "httpPort": 5000,
-      "sslPort": 5001
+      "httpPort": 10309,
+      "sslPort": 44383
     },
     "IIS": {
       "commandName": "IIS",
